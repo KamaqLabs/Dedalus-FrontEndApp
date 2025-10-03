@@ -11,10 +11,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class App {
   protected readonly title = signal('dedalus-front-end-app');
-
   constructor(private translate: TranslateService) {
     translate.use('en');
 
   }
-
 }
