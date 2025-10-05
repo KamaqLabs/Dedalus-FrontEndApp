@@ -22,12 +22,8 @@ export class IamService extends BaseService<Administrator>{
       .pipe(
         retry(2),
         catchError(error => {
-          console.error('Error en SignIn:', error);
           return throwError(() => error);
         })
       );
   }
-
-
-
 }
