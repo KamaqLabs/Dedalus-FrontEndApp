@@ -20,7 +20,7 @@ export class IamService extends BaseService<Administrator>{
   public SignIn(signInRequest: SignInRequest) {
     return this.http.post<Administrator>(`${this.basePath}${this.resourceEndpoint}`, JSON.stringify(signInRequest), this.httpOptions)
       .pipe(
-        retry(2),
+        retry(1),
         catchError(error => {
           return throwError(() => error);
         })
