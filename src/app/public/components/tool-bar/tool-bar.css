@@ -1,0 +1,54 @@
+/* src/app/public/components/tool-bar/tool-bar.css */
+
+
+.toolbar {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  background: #111827;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 0 24px;
+  color: #D1D5DB;
+}
+.toolbar-section {
+  display: flex;
+  align-items: center;
+}
+.left .logo {
+  height: 40px;
+}
+.center {
+  flex: 1;
+  justify-content: center;
+}
+.app-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.right .toolbar-btn {
+  margin-left: 16px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #D1D5DB;
+}
+.profile-icon {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  margin-left: 16px;
+}
+.logout {
+  margin-left: 16px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #d32f2f;
+  font-weight: bold;
+}
+
