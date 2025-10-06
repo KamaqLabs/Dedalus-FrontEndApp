@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
+import {ToolBar} from './public/components/tool-bar/tool-bar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, ToolBar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

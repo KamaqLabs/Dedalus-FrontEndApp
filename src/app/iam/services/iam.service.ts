@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import {BaseService} from '../../shared/services/base.service';
 import {Administrator} from '../../profiles/models/administrator.entity';
 import {SignInRequest} from '../models/sign-in.request';
-import {catchError, retry, throwError} from 'rxjs';
+import {catchError, map, Observable, throwError} from 'rxjs';
+import {SignInResponse} from '../models/sign-in.response';
+import {AuthenticationMeResponse} from '../models/authentication-me.response';
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class IamService extends BaseService<Administrator>{
+export class IamService extends BaseService<any>{
 
 
   constructor() {
@@ -17,13 +19,50 @@ export class IamService extends BaseService<Administrator>{
     this.resourceEndpoint = 'authentication/sign-in';
   }
 
-  public SignIn(signInRequest: SignInRequest) {
-    return this.http.post<Administrator>(`${this.basePath}${this.resourceEndpoint}`, JSON.stringify(signInRequest), this.httpOptions)
+  public SignIn(signInRequest: SignInRequest): Observable<SignInResponse> {
+    return this.http.post<any>(
+      `${this.basePath}${this.resourceEndpoint}`,
+      JSON.stringify(signInRequest),
+      { ...this.httpOptions, withCredentials: true }
+    )
       .pipe(
-        retry(1),
-        catchError(error => {
-          return throwError(() => error);
-        })
+        map(response => new SignInResponse(
+          response.token,
+          response.refreshToken,
+          response.profileId,
+          response.username,
+          response.rol
+        )),
+        catchError(error => throwError(() => error))
+      );
+  }
+
+  public AuthenticationMe(): Observable<AuthenticationMeResponse> {
+    return this.http.post<any>(
+      `${this.basePath}authentication/me`,
+      this.httpOptions,
+      { withCredentials: true }
+    )
+      .pipe(
+        map(response => new AuthenticationMeResponse(
+          response.id,
+          response.username,
+          response.rol,
+          response.iat,
+          response.exp
+        )),
+        catchError(error => throwError(() => error))
+      );
+  }
+
+  public LogOut(accountId: number): Observable<any> {
+    return this.http.post(
+      `${this.basePath}authentication/logout/account/${accountId}`,
+      this.httpOptions,
+      { withCredentials: true }
+    )
+      .pipe(
+        catchError(error => throwError(() => error))
       );
   }
 }
