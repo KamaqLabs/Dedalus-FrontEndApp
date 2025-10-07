@@ -9,17 +9,17 @@
   </div>
   @if (isAuthenticated()) {
     <div class="toolbar-section right">
-      <button class="toolbar-btn">Rooms</button>
-      <button class="toolbar-btn">Room Classes</button>
-      <button class="toolbar-btn">Bookings</button>
-      <button class="toolbar-btn">Settings</button>
+      <a class="toolbar-btn" href="/rooms">Rooms</a>
+      <a class="toolbar-btn" href="/room-classes">Room Classes</a>
+      <a class="toolbar-btn" href="/bookings">Bookings</a>
+      <a class="toolbar-btn" href="/settings">Settings</a>
       <img src="assets/profile.png" alt="Profile" class="profile-icon">
-      <button class="logout">Log out</button>
+      <button class="logout" (click)="logout()">Log out</button>
     </div>
   }
   @else  {
     <div class="toolbar-section right">
-      <button class="toolbar-btn">Sign In</button>
+      <a class="toolbar-btn" href="/login">Sign In</a>
     </div>
   }
 </nav>
