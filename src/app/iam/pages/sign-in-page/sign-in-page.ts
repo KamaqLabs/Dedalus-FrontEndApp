@@ -30,8 +30,8 @@ export class SignInPage implements OnInit {
       next: (data) => {
         this.administratorProfileService.getByAccountId(data.id).subscribe({
           next: (admin) => {
-            this.sessionStorageService.set("profile", admin);
-            this.sessionStorageService.set('isAuthenticated', true);
+            this.sessionStorageService.setProfile(admin);
+            this.sessionStorageService.setAuthenticated(true);
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
