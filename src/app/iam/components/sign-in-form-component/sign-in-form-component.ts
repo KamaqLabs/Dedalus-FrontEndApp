@@ -28,14 +28,13 @@ export class SignInFormComponent {
   ) {
   }
 
-
   signIn(username: string, password: string): void {
     this.iamService.SignIn({ username, password }).subscribe({
       next: (data: SignInResponse) => {
         this.administratorProfileService.getByAccountId(data.profileId).subscribe({
           next: (admin: Administrator) => {
-            this.sessionStorageService.set("profile", admin);
-            this.sessionStorageService.set('isAuthenticated', true);
+            this.sessionStorageService.setProfile(admin);
+            this.sessionStorageService.setAuthenticated(true);
             this.router.navigate(['/dashboard']);
           },
           error: (err) => {
@@ -48,6 +47,5 @@ export class SignInFormComponent {
       }
     });
   }
-
 
 }

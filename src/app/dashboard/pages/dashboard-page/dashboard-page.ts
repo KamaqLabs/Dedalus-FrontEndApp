@@ -8,17 +8,11 @@ import {SessionStorageService} from '../../../public/services/session-storage.se
   styleUrl: './dashboard-page.css'
 })
 export class DashboardPage implements OnInit {
-
-
     constructor(
       private sessionService: SessionStorageService,
       private administratorProfileService: SessionStorageService,
     ) {}
-
     ngOnInit(): void {
-
       console.log(this.sessionService.get("profile"));
-
     }
-
 }

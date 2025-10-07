@@ -58,11 +58,10 @@ export class IamService extends BaseService<any>{
   public LogOut(accountId: number): Observable<any> {
     return this.http.post(
       `${this.basePath}authentication/logout/account/${accountId}`,
-      this.httpOptions,
-      { withCredentials: true }
-    )
-      .pipe(
-        catchError(error => throwError(() => error))
-      );
+      {},
+      { withCredentials: true, responseType: 'text' as const }
+    ).pipe(
+      catchError(error => throwError(() => error))
+    );
   }
 }
