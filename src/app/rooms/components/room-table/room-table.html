@@ -1,0 +1,57 @@
+
+
+<div class="filters">
+  <input type="text" placeholder="Room Name" [(ngModel)]="filterName" />
+  <input type="number" placeholder="Floor" [(ngModel)]="filterFloor" />
+  <input type="text" placeholder="Class" [(ngModel)]="filterClass" />
+  <select [(ngModel)]="filterStatus">
+    <option value="">All Status</option>
+    <option value="available">Available</option>
+    <option value="occupied">Occupied</option>
+    <option value="reserved">Reserved</option>
+  </select>
+  <button (click)="clearFilters()">Clear</button>
+</div>
+
+<table class="room-table">
+  <thead>
+  <tr>
+    <th class="header">Number</th>
+    <th class="header">Floor</th>
+    <th class="header">Status</th>
+    <th class="header">Class</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (room of filteredRooms(); track room.id) {
+      <tr (click)="openModal(room)">
+        <td>{{ room.roomNumber }}</td>
+        <td>{{ room.floor }}</td>
+        <td>
+          <span [ngClass]="{
+            'status-available': room.roomStatus === 'available',
+            'status-occupied': room.roomStatus === 'occupied',
+            'status-reserved': room.roomStatus === 'reserved'
+          }">{{ room.roomStatus }}</span>
+        </td>
+        <td>{{ room.roomClass?.roomClassName }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@if (selectedRoom) {
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>Room Details</h3>
+      <p><b>Number:</b> {{ selectedRoom.roomNumber }}</p>
+      <p><b>Floor:</b> {{ selectedRoom.floor }}</p>
+      <p><b>Status:</b> {{ selectedRoom.roomStatus }}</p>
+      <p><b>Class:</b> {{ selectedRoom.roomClass?.roomClassName }}</p>
+      <p><b>Max Occupancy:</b> {{ selectedRoom.roomClass?.maxOccupancy }}</p>
+      <p><b>Price/Night:</b> {{ selectedRoom.roomClass?.defaultPricePerNight }}</p>
+      <p><b>Description:</b> {{ selectedRoom.roomClass?.description }}</p>
+    </div>
+  </div>
+}

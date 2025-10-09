@@ -1,0 +1,140 @@
+.room-table {
+  width: 480px;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 24px auto;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  color: #FFFFFF;
+}
+
+/* Bordes redondeados solo en las esquinas */
+.room-table th.header:first-child {
+  border-top-left-radius: 16px;
+}
+.room-table th.header:last-child {
+  border-top-right-radius: 16px;
+}
+.room-table tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
+}
+.room-table tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+.filters input, .filters select {
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.filters button {
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #2a4d8f;
+  color: #fff;
+  cursor: pointer;
+}
+
+.status-available {
+  background: #c8f7c5;
+  color: #207a2b;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.status-occupied {
+  background: #ffb3b3;
+  color: #b71c1c;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.status-reserved {
+  background: #ffd180;
+  color: #e65100;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.room-table th.header {
+  background: #2a4d8f;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 8px 12px;
+}
+
+.room-table td {
+  padding: 8px 12px;
+  background: #111827;
+  border: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.room-table tbody tr:hover td {
+  background-color: #d0e3ff;
+  color: black;
+  cursor: pointer;
+}
+
+/* Modal igual que antes */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 18px;
+  padding: 32px 24px;
+  min-width: 320px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  color: #2a4d8f;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.status-available {
+  background: #c8f7c5;
+  color: #207a2b;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.status-occupied {
+  background: #ffb3b3;
+  color: #b71c1c;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+.status-reserved {
+  background: #ffd180;
+  color: #e65100;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: bold;
+}

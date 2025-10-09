@@ -1,0 +1,11 @@
+<div style="display: flex; flex-direction: column; align-items: center;">
+  @for (room of roomClasses$ | async; track room.id) {
+    <app-room-class-card-component
+      [roomClassName]="room.roomClassName"
+      [maxOccupancy]="room.maxOccupancy"
+      [defaultPricePerNight]="room.defaultPricePerNight"
+      [description]="room.description"
+      (delete)="onDeleteRoom(room.id)">
+    </app-room-class-card-component>
+  }
+</div>

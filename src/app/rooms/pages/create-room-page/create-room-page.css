@@ -1,0 +1,20 @@
+.room-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .room-page-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem; /* Ajusta el valor según lo que necesites */
+  }
+}
+
+.create-room-bg {
+  background-color: #13151F;
+  min-height: 100vh;
+  padding: 2rem;
+}
