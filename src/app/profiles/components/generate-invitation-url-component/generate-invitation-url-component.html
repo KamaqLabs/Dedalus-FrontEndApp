@@ -1,0 +1,16 @@
+<form (ngSubmit)="generateUrl()" class="invitation-form">
+  <label for="email">Invitar nuevo Administrador</label>
+  <input id="email" [(ngModel)]="email" name="email" required type="email" />
+  <button type="submit" [disabled]="loading">Generar invitación</button>
+</form>
+
+@if (showModal) {
+  <div class="modal">
+    <div class="modal-content">
+      <p>URL de invitación generada:</p>
+      <input [value]="invitationUrl" readonly />
+      <button (click)="copyUrl()">Copiar link</button>
+      <button (click)="closeModal()">Cerrar</button>
+    </div>
+  </div>
+}

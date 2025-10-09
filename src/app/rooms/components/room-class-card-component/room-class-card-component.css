@@ -1,0 +1,93 @@
+.room-card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  min-height: 80px;
+  min-width: 600px;
+  max-width: 800px;
+  background: #f7f7fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(78, 84, 200, 0.08);
+  padding: 16px 24px;
+  margin: 12px 0;
+  transition: box-shadow 0.2s;
+}
+
+.room-card:hover {
+  box-shadow: 0 4px 16px rgba(78, 84, 200, 0.18);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  border: none;
+  color: #d32f2f;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: #ffeaea;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre nombre y lápiz */
+  justify-content: flex-start; /* Alinea a la izquierda */
+}
+.card-header:hover .edit-icon {
+  visibility: visible;
+  opacity: 1;
+}
+
+.room-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4e54c8;
+}
+
+.edit-icon {
+  margin-left: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, visibility 0.2s;
+  pointer-events: none;
+}
+
+.room-card:hover .edit-icon {
+  visibility: visible;
+  opacity: 1;
+}
+
+.room-card:hover .edit-icon {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.card-details {
+  display: flex;
+  gap: 24px;
+  font-size: 0.95rem;
+  color: #444;
+  margin: 4px 0 0 0;
+}
+
+.card-description {
+  font-size: 0.92rem;
+  color: #666;
+  margin-top: 6px;
+}

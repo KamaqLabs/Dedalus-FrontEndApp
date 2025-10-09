@@ -1,11 +1,11 @@
-<!-- src/app/public/components/tool-bar/tool-bar.html -->
+
 <nav class="toolbar">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <div class="toolbar-section left">
     <img src="assets/logo.png" alt="Logo" class="logo">
   </div>
   <div class="toolbar-section center">
-    <span class="app-title">Dedalus</span>
+    <a class="app-title" href="/dashboard">Dedalus</a>
   </div>
   @if (isAuthenticated()) {
     <div class="toolbar-section right">
@@ -13,7 +13,7 @@
       <a class="toolbar-btn" href="/room-classes">Room Classes</a>
       <a class="toolbar-btn" href="/bookings">Bookings</a>
       <a class="toolbar-btn" href="/settings">Settings</a>
-      <img src="assets/profile.png" alt="Profile" class="profile-icon">
+      <img src="assets/profile.png"  alt="Profile" class="profile-icon">
       <button class="logout" (click)="logout()">Log out</button>
     </div>
   }

@@ -1,0 +1,16 @@
+<div class="room-card">
+  <button class="delete-btn" (click)="onDelete()" aria-label="Delete">&#10006;</button>
+  <div class="card-content">
+    <div class="card-header">
+      <span class="room-name">{{ roomClassName }}</span>
+      <span class="edit-icon">&#9998;</span>
+    </div>
+    <div class="card-details">
+      <span>Ocupación máxima: {{ maxOccupancy }}</span>
+      <span>Precio por noche: ${{ defaultPricePerNight }}</span>
+    </div>
+    <div class="card-description">
+      {{ description }}
+    </div>
+  </div>
+</div>
