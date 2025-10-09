@@ -1,0 +1,93 @@
+.invitation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 350px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #13151F;
+  border-radius: 10px;
+  border: 2px solid #007bff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  color: #FFFFFF;
+}
+
+.invitation-form label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.invitation-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.invitation-form button {
+  padding: 0.7rem 1.2rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.invitation-form button:disabled {
+  background: #b0c4de;
+  cursor: not-allowed;
+}
+
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.modal-content button {
+  padding: 0.6rem 1.2rem;
+  background: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 0.5rem;
+  transition: background 0.2s;
+}
+
+.modal-content button:last-child {
+  background: #dc3545;
+}
+
+@media (max-width: 500px) {
+  .modal-content {
+    min-width: 90vw;
+    padding: 1rem;
+  }
+}
