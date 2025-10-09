@@ -1,0 +1,10 @@
+<div class="cards-list">
+  @for (card of cards; track card) {
+    <app-dashboard-card-information-component
+      [title]="card.title"
+      [value]="card.value"
+      [icon]="card.icon"
+      [link]="card.link">
+    </app-dashboard-card-information-component>
+  }
+</div>
