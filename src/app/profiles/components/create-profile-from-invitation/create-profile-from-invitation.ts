@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {ActivatedRoute, Router} from '@angular/router';
 import { AdministratorProfileService } from '../../services/administrator-profile.service';
 import { CreateAdministratorProfileFromInvitation } from '../../models/create-administrator-profile-from-invitation';
+import {SnackbarErrorService} from '../../../public/services/snackbar-error.service';
 
 @Component({
   selector: 'app-create-profile-from-invitation',
@@ -24,7 +25,8 @@ export class CreateProfileFromInvitation {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private service: AdministratorProfileService,
-    private router: Router
+    private router: Router,
+    private snackbarError: SnackbarErrorService
   ) {
     this.form = this.fb.group({
       username: ['', Validators.required],
@@ -36,9 +38,23 @@ export class CreateProfileFromInvitation {
     });
 
     this.hotelId = Number(this.route.snapshot.paramMap.get('hotelId'));
-    console.log(this.route.snapshot.paramMap.get('hotelId'));
     this.invitationToken = this.route.snapshot.paramMap.get('token') || '';
-    console.log(this.invitationToken);
+    this.service.verifyInvitationToken(this.invitationToken).subscribe(
+      {
+        next: (data) => {
+          if(data == "valid"){
+            console.log("Token is valid");
+          }
+          else{
+            this.snackbarError.show( 'Invitation Link Invalid :(', 4000);
+            this.router.navigate(['/']);
+          }
+        },
+        error: (err) => {
+          this.snackbarError.show(err?.error?.message || 'Error desconocido', 4000);
+        }
+      }
+    )
 
   }
 
@@ -61,7 +77,9 @@ export class CreateProfileFromInvitation {
           this.success = true;
           this.router.navigate(['/login']);
         },
-        error: err => { this.error = 'Error al crear el perfil.'; }
+        error: (err) => {
+          this.snackbarError.show(err?.error?.message || 'Error desconocido', 4000);
+        }
       });
   }
 }

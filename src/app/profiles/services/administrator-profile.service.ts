@@ -34,6 +34,15 @@ export class AdministratorProfileService extends BaseService<Administrator>{
     );
   }
 
+  public verifyInvitationToken(token: string) {
+    return this.http.get<string>(
+      `${this.basePath}profiles/administrator-profiles/invitations/verify?token=${token}`,
+      {
+        responseType: 'text' as 'json'
+      }
+    );
+  }
+
   public createAdministratorProfileFromInvitation(request: CreateAdministratorProfileFromInvitation  ,hotelId:number) {
     return this.http.post<Administrator>(`${this.basePath}profiles/administrator-profiles/invitations/accept/${hotelId}`, JSON.stringify(request), this.httpOptions);
   }

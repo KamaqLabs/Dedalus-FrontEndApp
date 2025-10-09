@@ -26,6 +26,7 @@ export class SignInPage implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    this.sessionStorageService.setAuthenticated(false);
     this.iamService.AuthenticationMe().subscribe({
       next: (data) => {
         this.administratorProfileService.getByAccountId(data.id).subscribe({

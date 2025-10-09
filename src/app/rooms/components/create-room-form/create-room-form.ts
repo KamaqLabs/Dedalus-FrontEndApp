@@ -56,6 +56,7 @@ export class CreateRoomForm  implements OnInit {
         this.snackbarError.show(err?.error?.message || 'Error desconocido', 4000);
       }
     });
+    window.location.reload();
   }
 
   ngOnInit(): void {

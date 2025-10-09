@@ -35,6 +35,8 @@ export class CreateHotelForm {
     this.hotelService.createHotel(request).subscribe({
       next: (response: Hotel) => {
         this.sessionStorageService.setHotel(response);
+        // Marcar que el hotel fue creado
+        sessionStorage.setItem('hotelCreated', 'true');
         this.router.navigate(['/administrator-sign-up']);
       },
       error: (err) => {

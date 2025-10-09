@@ -40,8 +40,8 @@ export class IamService extends BaseService<any>{
   public AuthenticationMe(): Observable<AuthenticationMeResponse> {
     return this.http.post<any>(
       `${this.basePath}authentication/me`,
-      this.httpOptions,
-      { withCredentials: true }
+      {}, // ✅ Body vacío
+      { ...this.httpOptions, withCredentials: true } // ✅ Opciones correctas
     )
       .pipe(
         map(response => new AuthenticationMeResponse(

@@ -2,10 +2,14 @@
 <nav class="toolbar">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <div class="toolbar-section left">
-    <img src="assets/logo.png" alt="Logo" class="logo">
+    <img src="https://i.ibb.co/60NSzw8b/logo-dedalus.jpg" alt="Logo" class="logo circular">
   </div>
   <div class="toolbar-section center">
-    <a class="app-title" href="/dashboard">Dedalus</a>
+    @if (isAuthenticated()) {
+      <a class="app-title" href="/dashboard">Dedalus</a>
+    } @else {
+      <a class="app-title" href="/">Dedalus</a>
+    }
   </div>
   @if (isAuthenticated()) {
     <div class="toolbar-section right">
@@ -13,12 +17,13 @@
       <a class="toolbar-btn" href="/room-classes">Room Classes</a>
       <a class="toolbar-btn" href="/bookings">Bookings</a>
       <a class="toolbar-btn" href="/settings">Settings</a>
-      <img src="assets/profile.png"  alt="Profile" class="profile-icon">
+      <img src="https://www.freeiconspng.com/uploads/am-a-19-year-old-multimedia-artist-student-from-manila--21.png"  alt="Profile" class="profile-icon">
       <button class="logout" (click)="logout()">Log out</button>
     </div>
   }
   @else  {
     <div class="toolbar-section right">
+      <a class="toolbar-btn" href="/create-hotel">Sign Up</a>
       <a class="toolbar-btn" href="/login">Sign In</a>
     </div>
   }
