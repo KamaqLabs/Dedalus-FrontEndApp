@@ -1,0 +1,102 @@
+<mat-toolbar color="primary">Hotel IoT Dashboard</mat-toolbar>
+
+<div class="p-4" *ngIf="sensors">
+  <mat-grid-list cols="3" rowHeight="150px" gutterSize="16px">
+
+    <!-- Gas Sensors -->
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Gas Sensor 1</mat-card-title>
+        <mat-card-content>{{ sensors.gas1 }}</mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Gas Sensor 2</mat-card-title>
+        <mat-card-content>{{ sensors.gas2 }}</mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Temperature & Humidity -->
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>DHT22 #1</mat-card-title>
+        <mat-card-content>
+          🌡️ {{ sensors.dht1_temp }}°C<br>
+          💧 {{ sensors.dht1_hum }}%
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>DHT22 #2</mat-card-title>
+        <mat-card-content>
+          🌡️ {{ sensors.dht2_temp }}°C<br>
+          💧 {{ sensors.dht2_hum }}%
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- PIR Sensors -->
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>PIR #1</mat-card-title>
+        <mat-card-content>
+          {{ sensors.pir1 ? 'Motion Detected' : 'No Motion' }}
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>PIR #2</mat-card-title>
+        <mat-card-content>
+          {{ sensors.pir2 ? 'Motion Detected' : 'No Motion' }}
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <!-- Actuators -->
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Servo 1</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button
+                  color="{{ sensors.servo1 ? 'accent' : 'primary' }}"
+                  (click)="toggleActuator('servo1')">
+            {{ sensors.servo1 ? 'Deactivate' : 'Activate' }}
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Buzzer 1</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button
+                  color="{{ sensors.buzzer1 ? 'accent' : 'primary' }}"
+                  (click)="toggleActuator('buzzer1')">
+            {{ sensors.buzzer1 ? 'Deactivate' : 'Activate' }}
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Light 1</mat-card-title>
+        <mat-card-content>
+          <button mat-raised-button
+                  color="{{ sensors.light1 ? 'accent' : 'primary' }}"
+                  (click)="toggleActuator('light1')">
+            {{ sensors.light1 ? 'Turn Off' : 'Turn On' }}
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</div>

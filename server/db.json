@@ -1,0 +1,24 @@
+{
+  "IOT_sensor": {
+    "gas1": 2800,
+    "gas2": 2700,
+    "pir1": 1,
+    "pir2": 0,
+    "dht1_temp": 25.5,
+    "dht1_hum": 60,
+    "dht2_temp": 26.2,
+    "dht2_hum": 55,
+    "servo1": 0,
+    "buzzer1": 0,
+    "light1": 1
+  },
+  "reservations": [
+    {
+      "id": 1,
+      "guestCode": "123456789",
+      "roomId": 1,
+      "checkInDate": "2025-09-15T14:00:00-05:00",
+      "checkOutDate": "2025-09-20T12:00:00-05:00"
+    }
+  ]
+}

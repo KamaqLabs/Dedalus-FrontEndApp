@@ -14,6 +14,10 @@ import {HotelCreatedGuard} from './hotel/models/hotel-created.guard';
 import {AuthGuard} from './iam/guards/Auth.guard';
 import {PresentationPage} from './public/pages/presentation-page/presentation-page';
 
+import {ComponentDashboardIot} from './DashboardIot/components/component-dashboard-iot/component-dashboard-iot';
+import {ComponentReservation} from './Reservation/components/component-reservation/component-reservation';
+
+
 export const routes: Routes = [
   {path: ""            ,component: PresentationPage},
   {path: "login"            ,component: SignInPage},
@@ -23,5 +27,6 @@ export const routes: Routes = [
   {path: "room-classes"            ,component: CreateRoomClassPage},
   {path: "rooms"            ,component: CreateRoomPage},
   {path: "signup/:token/:hotelId"            ,component: CreateAdminFromInvitationPage},
-
+  { path: 'iot', component: ComponentDashboardIot },
+  { path: 'reservations', component: ComponentReservation }
 ];

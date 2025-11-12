@@ -1,0 +1,22 @@
+<mat-card>
+  <h2>Room Reservation</h2>
+  <p>Status:
+    <strong [style.color]="roomAvailable ? 'green' : 'red'">
+      {{ roomAvailable ? 'Available' : 'Occupied' }}
+    </strong>
+  </p>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Guest Code</mat-label>
+    <input matInput [(ngModel)]="reservation.guestCode" placeholder="Enter code" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>Room ID</mat-label>
+    <input matInput type="number" [(ngModel)]="reservation.roomId" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="makeReservation()" [disabled]="!roomAvailable">
+    Reserve Room
+  </button>
+</mat-card>
