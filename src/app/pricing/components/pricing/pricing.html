@@ -1,0 +1,63 @@
+<section class="overlay-container">
+
+  <h2 class="pricing-title">Planes de Pago</h2>
+
+  <div class="pricing-cards">
+
+    <!-- PLAN PRO -->
+    <mat-card class="pricing-card featured">
+      <div class="pricing-badge">Recomendado</div>
+
+      <div class="pricing-icon">
+        <span style="font-size:2rem;">🚀</span>
+      </div>
+
+      <h3>Pro</h3>
+      <p class="price">S/ 99</p>
+
+      <mat-card-content>
+        <ul>
+          <li>Acceso completo</li>
+          <li>Soporte prioritario</li>
+          <li>Hasta 10 dispositivos IoT</li>
+        </ul>
+      </mat-card-content>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onRegister()"
+      >
+        Elegir
+      </button>
+    </mat-card>
+
+    <!-- PLAN EMPRESARIAL -->
+    <mat-card class="pricing-card">
+      <div class="pricing-icon">
+        <span style="font-size:2rem;">🏢</span>
+      </div>
+
+      <h3>Empresarial</h3>
+      <p class="price">S/ 299</p>
+
+      <mat-card-content>
+        <ul>
+          <li>Funcionalidades avanzadas</li>
+          <li>Soporte dedicado</li>
+          <li>Dispositivos ilimitados</li>
+        </ul>
+      </mat-card-content>
+
+      <button
+        mat-stroked-button
+        color="accent"
+        (click)="onRegister()"
+      >
+        Elegir
+      </button>
+    </mat-card>
+
+  </div>
+
+</section>
