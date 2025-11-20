@@ -54,4 +54,8 @@ export class PresentationPage implements OnInit {
     this.router.navigate(['/create-hotel']);
   }
 
+  onRricing(): void {
+    this.router.navigate(['/pricing']);
+  }
+
 }

@@ -16,6 +16,8 @@ import {PresentationPage} from './public/pages/presentation-page/presentation-pa
 
 import {ComponentDashboardIot} from './DashboardIot/components/component-dashboard-iot/component-dashboard-iot';
 import {ComponentReservation} from './Reservation/components/component-reservation/component-reservation';
+import {PricingPage} from './pricing/page/pricing-page/pricing-page';
+
 
 
 export const routes: Routes = [
@@ -28,5 +30,6 @@ export const routes: Routes = [
   {path: "rooms"            ,component: CreateRoomPage},
   {path: "signup/:token/:hotelId"            ,component: CreateAdminFromInvitationPage},
   { path: 'iot', component: ComponentDashboardIot },
-  { path: 'reservations', component: ComponentReservation }
+  { path: 'reservations', component: ComponentReservation },
+  {path:'pricing',component:PricingPage}
 ];
