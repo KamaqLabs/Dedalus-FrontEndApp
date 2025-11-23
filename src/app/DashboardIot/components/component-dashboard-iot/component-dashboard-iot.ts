@@ -50,10 +50,6 @@ export class ComponentDashboardIot implements OnInit, OnDestroy {
       console.log(this.sensors);
 
     });
-
-
-
-
   }
 
   getSensorIcon(name: string): string {
