@@ -14,7 +14,7 @@ RUN npm run build -- --configuration=production
 # Stage 2: runtime con nginx
 FROM nginx:stable-alpine AS runtime
 # Reemplaza `your-app-name` por la carpeta real en dist (ej: my-app)
-COPY --from=builder /app/dist/your-app-name /usr/share/nginx/html
+COPY --from=builder /app/dist/dedalus-front-end-app /usr/share/nginx/html
 # Copia un nginx.conf personalizado (asegúrate que exista en el repo)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
