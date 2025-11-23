@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  serverBasePath:'',
-  HOTEL_EXISTS: false,
-  HOTEL_ID: 1,
+  serverBasePath:'http://localhost:3000/api/v1/',
+  edgeServerBasePath:'http://localhost:5000/api/v1/',
 };
+

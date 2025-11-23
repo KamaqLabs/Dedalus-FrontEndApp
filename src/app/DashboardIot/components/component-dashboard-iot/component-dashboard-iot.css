@@ -1,96 +1,81 @@
-/* General layout */
-body {
-  background-color: #f5f7fb;
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* Toolbar */
-mat-toolbar {
-  background-color: #0d47a1; /* Azul oscuro */
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 1.2rem;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Dashboard container */
 .dashboard-container {
-  background-color: #ffffff;
-  border-radius: 12px;
-  max-width: 1100px;
-  margin: 2rem auto;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: grid;
+  gap: 20px;
+  padding: 20px;
 }
 
-/* Cards for sensors/actuators */
-mat-card {
+.card {
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  color: white;
+}
+
+.sensor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.sensor-item {
+  background: #2b2b2b;
+  padding: 14px;
   border-radius: 10px;
-  text-align: center;
-  background-color: #ffffff;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-mat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+.sensor-name {
+  display: block;
+  font-size: 15px;
+  color: #aaa;
 }
 
-/* Titles and contents */
-mat-card-title {
-  font-weight: 600;
-  color: #0d47a1;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+.sensor-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
 }
 
-mat-card-content {
-  color: #333333;
-  font-size: 1rem;
-  line-height: 1.5;
+/* MOTION STYLES */
+
+.motion-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* Buttons */
-button[mat-raised-button] {
-  border-radius: 6px;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  transition: background-color 0.2s ease;
+.motion-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #2b2b2b;
+  padding: 12px;
+  border-radius: 10px;
 }
 
-button[mat-raised-button][color="primary"] {
-  background-color: #1976d2;
-  color: white;
+.motion-status {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
 }
 
-button[mat-raised-button][color="primary"]:hover {
-  background-color: #0d47a1;
+.motion-circle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-button[mat-raised-button][color="accent"] {
-  background-color: #ef5350;
-  color: white;
+/* Movimiento detectado — animado */
+.motion-status.detected .motion-circle {
+  background: #ff4444;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px #ff4444;
 }
 
-button[mat-raised-button][color="accent"]:hover {
-  background-color: #c62828;
-}
-
-/* Grid layout */
-mat-grid-list {
-  margin-top: 1rem;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-  mat-grid-list {
-    grid-template-columns: 1fr !important;
-  }
-
-  .dashboard-container {
-    padding: 1rem;
-  }
+/* No movimiento */
+.motion-status.idle .motion-circle {
+  background: #666;
 }

@@ -2,51 +2,71 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IotSensor} from '../../models/iot-sensor.model';
 import {Subscription} from 'rxjs';
 import {DashboardService} from '../../services/dashboard';
-import {MatToolbar} from '@angular/material/toolbar';
-import {NgIf} from '@angular/common';
-import {MatGridList, MatGridTile} from '@angular/material/grid-list';
-import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
-import {MatButton} from '@angular/material/button';
+import {WebsocketService} from '../../../shared/services/web-socket.service';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-component-dashboard-iot',
   imports: [
-    MatToolbar,
-    NgIf,
-    MatGridTile,
-    MatCard,
-    MatCardTitle,
-    MatCardContent,
-    MatGridList,
-    MatButton
   ],
   templateUrl: './component-dashboard-iot.html',
   styleUrl: './component-dashboard-iot.css'
 })
 export class ComponentDashboardIot implements OnInit, OnDestroy {
 
-  sensors?: IotSensor;
-  private subscription?: Subscription;
+  private subscription!: Subscription;
 
-  constructor(private dashboardService: DashboardService) {}
+  smokeEntries: any[] = [];
+  tempEntries: any[] = [];
+  motionEntries: any[] = [];
+  sensors: IotSensor[] = [];
+  constructor(
+    private websocketService: WebsocketService,
+    private dashboardService: DashboardService
+    ) {}
 
-  ngOnInit(): void {
-    this.subscription = this.dashboardService.pollSensors(3000).subscribe({
-      next: (data) => this.sensors = data
+   ngOnInit() {
+    this.websocketService.listen("new_data").subscribe((data: any) => {
+
+      const topic = data.topic;
+      const payload = data.payload;
+
+      if (topic === "esp32/data/smoke") {
+        this.smokeEntries = Object.entries(payload).map(([key, value]) => ({key, value}));
+      }
+
+      else if (topic === "esp32/data/temperature") {
+        this.tempEntries = Object.entries(payload).map(([key, value]) => ({key, value}));
+      }
+
+      else if (topic === "esp32/data/motion") {
+        this.motionEntries = Object.entries(payload).map(([key, value]) => ({key, value}));
+      }
+
+      this.dashboardService.getSensors().subscribe((sensors: IotSensor[]) => {
+        this.sensors = sensors;
+      });
+
+      console.log(this.sensors);
+
     });
+
+
+
+
   }
 
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+  getSensorIcon(name: string): string {
+    name = name.toLowerCase();
+    if (name.includes("MQ")) return "🔥";
+    if (name.includes("Temperature")) return "🌡️";
+    if (name.includes("Humidity")) return "💧";
+    if (name.includes("PIR") || name.includes("motion")) return "🚶";
+    return "📟"; // default IoT icon
   }
 
-  toggleActuator(key: keyof IotSensor): void {
-    if (!this.sensors) return;
-    const newValue = this.sensors[key] ? 0 : 1;
-    this.dashboardService.updateSensor({ [key]: newValue }).subscribe();
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  asIsOrder(a: any, b: any) {
-    return 1;
-  }
 }
