@@ -1,102 +1,98 @@
-<mat-toolbar color="primary">Hotel IoT Dashboard</mat-toolbar>
+<div class="dashboard-container">
 
-<div class="p-4" *ngIf="sensors">
-  <mat-grid-list cols="3" rowHeight="150px" gutterSize="16px">
+  <div class="card">
+    <h2>📡 Registered Sensors</h2>
 
-    <!-- Gas Sensors -->
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>Gas Sensor 1</mat-card-title>
-        <mat-card-content>{{ sensors.gas1 }}</mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+    <ul class="divide-y divide-gray-200 mt-3">
+      @for (sensor of sensors; track sensor.id) {
+        <li class="py-3 flex items-center justify-between">
+          <div>
+            <div class="font-semibold">{{ sensor.name }}</div>
+            <!--div class="text-xs text-gray-500">Device: {{ sensor.device_id }}</div>   alch se ve feo -->
+          </div>
 
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>Gas Sensor 2</mat-card-title>
-        <mat-card-content>{{ sensors.gas2 }}</mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+          <span class="text-xl">{{ getSensorIcon(sensor.name) }}</span>
+        </li>
+      }
+    </ul>
+  </div>
 
-    <!-- Temperature & Humidity -->
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>DHT22 #1</mat-card-title>
-        <mat-card-content>
-          🌡️ {{ sensors.dht1_temp }}°C<br>
-          💧 {{ sensors.dht1_hum }}%
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
 
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>DHT22 #2</mat-card-title>
-        <mat-card-content>
-          🌡️ {{ sensors.dht2_temp }}°C<br>
-          💧 {{ sensors.dht2_hum }}%
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+  <!-- SMOKE SENSORS -->
+  <div class="card">
+    <h2>🔥 Smoke Sensors</h2>
+    <div class="sensor-grid">
+      @for (item of smokeEntries; track item.key) {
+        <div class="sensor-item">
+          <span class="sensor-name">{{ item.key }}</span>
 
-    <!-- PIR Sensors -->
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>PIR #1</mat-card-title>
-        <mat-card-content>
-          {{ sensors.pir1 ? 'Motion Detected' : 'No Motion' }}
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+          <!-- Añadimos ppm -->
+          <span class="sensor-value">{{ item.value }} ppm</span>
+        </div>
+      }
+    </div>
+  </div>
 
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>PIR #2</mat-card-title>
-        <mat-card-content>
-          {{ sensors.pir2 ? 'Motion Detected' : 'No Motion' }}
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+  <!-- TEMPERATURE & HUMIDITY -->
+  <div class="card">
+    <h2>🌡️ Humidity and Temperature</h2>
+    <div class="sensor-grid">
+      @for (item of tempEntries; track item.key) {
 
-    <!-- Actuators -->
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>Servo 1</mat-card-title>
-        <mat-card-content>
-          <button mat-raised-button
-                  color="{{ sensors.servo1 ? 'accent' : 'primary' }}"
-                  (click)="toggleActuator('servo1')">
-            {{ sensors.servo1 ? 'Deactivate' : 'Activate' }}
-          </button>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+        <div class="sensor-item">
+          <span class="sensor-name">{{ item.key }}</span>
 
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>Buzzer 1</mat-card-title>
-        <mat-card-content>
-          <button mat-raised-button
-                  color="{{ sensors.buzzer1 ? 'accent' : 'primary' }}"
-                  (click)="toggleActuator('buzzer1')">
-            {{ sensors.buzzer1 ? 'Deactivate' : 'Activate' }}
-          </button>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+          <!-- Detectar tipo por nombre -->
+          <span class="sensor-value">
 
-    <mat-grid-tile>
-      <mat-card>
-        <mat-card-title>Light 1</mat-card-title>
-        <mat-card-content>
-          <button mat-raised-button
-                  color="{{ sensors.light1 ? 'accent' : 'primary' }}"
-                  (click)="toggleActuator('light1')">
-            {{ sensors.light1 ? 'Turn Off' : 'Turn On' }}
-          </button>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+            @if (item.key.toLowerCase().includes('temperatura')) {
+              {{ item.value }} °C
+            }
+            @else if (item.key.toLowerCase().includes('humedad')) {
+              {{ item.value }} %
+            }
+            @else {
+              {{ item.value }}
+            }
 
-  </mat-grid-list>
+          </span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- MOTION -->
+  <div class="card">
+    <h2>🚶 Motion</h2>
+
+    <div class="sensor-grid motion-grid">
+      @for (item of motionEntries; track item.key) {
+
+        <div class="motion-item">
+
+          <div class="motion-status"
+               [class.detected]="item.value === 1"
+               [class.idle]="item.value === 0">
+            <div class="motion-circle"></div>
+          </div>
+
+          <div class="motion-info">
+            <span class="sensor-name">{{ item.key }}</span>
+
+            <span class="motion-text">
+              @if (item.value === 1) {
+                Detectado 👀
+              }
+              @else {
+                Sin movimiento
+              }
+            </span>
+          </div>
+
+        </div>
+      }
+    </div>
+
+  </div>
+
 </div>
