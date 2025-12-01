@@ -25,40 +25,14 @@ export class WebsocketService {
   }
 
   /**
-   * Escucha todos los mensajes emitidos por Flask bajo "new_data"
-   * y filtra por topic.
-   */
-  listenToTopic(topic: string): Observable<any> {
-    return new Observable(observer => {
-      this.socket.on('new_data', (msg: any) => {
-        if (msg.topic === topic) {
-          observer.next(msg.payload);
-        }
-      });
-    });
-  }
-
-  /**
-   * Opción: escuchar todo sin filtrar
-   */
-  listenAll(): Observable<any> {
-    return new Observable(observer => {
-      this.socket.on('new_data', (msg: any) => {
-        observer.next(msg);
-      });
-    });
-  }
-
-  /**
   trae todo, sin filtrar v2
   */
 
-  listen(eventName: string) {
+  listen(eventName: string): Observable<any> {
     return new Observable((subscriber) => {
-      this.socket.on(eventName, (data) => {
+      this.socket.on(eventName, (data: any) => {
         subscriber.next(data);
       });
     });
   }
-
 }

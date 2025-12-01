@@ -2,7 +2,8 @@
 
 export interface IotSensor {
   id: number;
-  name: string;
-  device_id: string;
+  sensor: string;
+  device: string;
   created_at: string;
+  updated_at: string;
 }

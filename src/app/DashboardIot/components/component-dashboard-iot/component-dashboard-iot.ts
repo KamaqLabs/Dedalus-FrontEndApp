@@ -3,7 +3,6 @@ import {IotSensor} from '../../models/iot-sensor.model';
 import {Subscription} from 'rxjs';
 import {DashboardService} from '../../services/dashboard';
 import {WebsocketService} from '../../../shared/services/web-socket.service';
-import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-component-dashboard-iot',
@@ -27,9 +26,10 @@ export class ComponentDashboardIot implements OnInit, OnDestroy {
 
    ngOnInit() {
     this.websocketService.listen("new_data").subscribe((data: any) => {
-
       const topic = data.topic;
       const payload = data.payload;
+
+      console.log(topic, payload);
 
       if (topic === "esp32/data/smoke") {
         this.smokeEntries = Object.entries(payload).map(([key, value]) => ({key, value}));
@@ -42,18 +42,11 @@ export class ComponentDashboardIot implements OnInit, OnDestroy {
       else if (topic === "esp32/data/motion") {
         this.motionEntries = Object.entries(payload).map(([key, value]) => ({key, value}));
       }
-
-      this.dashboardService.getSensors().subscribe((sensors: IotSensor[]) => {
-        this.sensors = sensors;
-      });
-
-      console.log(this.sensors);
-
     });
+     this.dashboardService.getSensors().subscribe((sensors: IotSensor[]) => {this.sensors = sensors;});
   }
 
   getSensorIcon(name: string): string {
-    name = name.toLowerCase();
     if (name.includes("MQ")) return "🔥";
     if (name.includes("Temperature")) return "🌡️";
     if (name.includes("Humidity")) return "💧";
@@ -62,7 +55,10 @@ export class ComponentDashboardIot implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
+
 
 }

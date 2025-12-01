@@ -7,11 +7,11 @@
       @for (sensor of sensors; track sensor.id) {
         <li class="py-3 flex items-center justify-between">
           <div>
-            <div class="font-semibold">{{ sensor.name }}</div>
+            <div class="font-semibold">{{ sensor.sensor }}</div>
             <!--div class="text-xs text-gray-500">Device: {{ sensor.device_id }}</div>   alch se ve feo -->
           </div>
 
-          <span class="text-xl">{{ getSensorIcon(sensor.name) }}</span>
+          <span class="text-xl">{{ getSensorIcon(sensor.sensor) }}</span>
         </li>
       }
     </ul>
